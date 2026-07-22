@@ -38,6 +38,12 @@ export default function Navbar() {
               alt="Logo Universitas" 
               className="h-15 md:h-17 w-auto object-contain"
             />
+            {/* 2. Logo Kulon Progo (TAMBAHKAN KODE INI DI SINI) */}
+            <img 
+              src="/assets/LogoKulonProgo.jpg" 
+              alt="Logo Kulon Progo" 
+              className="w-10 h-10 md:w-15 md:h-15 object-contain" 
+            />
             <a
               href="/"
               className={`font-semibold tracking-tight transition-colors duration-300 ${
