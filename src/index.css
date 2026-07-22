@@ -1,0 +1,50 @@
+@import 'tailwindcss';
+
+@theme {
+  /* ── Soft Orange palette ── */
+  --color-orange-50: #fff9f5;
+  --color-orange-100: #ffecd9;
+  --color-orange-200: #ffd4b3;  /* Cocok untuk background tipis atau highlight */
+  --color-orange-300: #ffb780;
+  --color-orange-400: #ff9446;
+  --color-orange-500: #f57d31;  /* Warna utama (Soft/Warm Orange) */
+  --color-orange-600: #d9621b;
+  --color-orange-700: #b54a12;
+  --color-orange-800: #923d14;
+  --color-orange-900: #783414;
+  --color-orange-950: #421808;
+
+  /* ── Wood / Brown accent ── */
+  --color-wood-50: #fdf8f0;
+  --color-wood-100: #f5f0eb;
+  --color-wood-200: #e8ddd0;
+  --color-wood-300: #d4c4ab;
+  --color-wood-400: #b8a07a;
+  --color-wood-500: #8b6f47;
+  --color-wood-600: #7a5f3a;
+  --color-wood-700: #6b4f2e;
+  --color-wood-800: #5a4226;
+  --color-wood-900: #4a3620;
+
+  /* ── Warm neutrals (backgrounds) ── */
+  --color-warm-50: #faf9f6;
+  --color-warm-100: #f4f2ed;
+  --color-warm-200: #eae7e0;
+
+  /* ── Typography ── */
+  --font-sans: 'Poppins', system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-warm-50);
+  }
+  ::selection {
+    /* Mengubah warna seleksi teks menjadi tema orange */
+    background-color: var(--color-orange-200);
+    color: var(--color-orange-900);
+  }
+}
