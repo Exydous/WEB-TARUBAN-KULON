@@ -51,7 +51,7 @@ export default function Gallery() {
         "/assets/Our-Stories/1st-Weeks/1st-9.jpg",
         "/assets/Our-Stories/1st-Weeks/1st-10.jpg"
       ],
-      driveLink: "https://drive.google.com/drive/folders/LINK_FOLDER_SOSIALISASI" 
+      driveLink: "https://drive.google.com/drive/folders/1yjVaIT5y8Gbt_R3MQP_4WKE1y9dSDrZ9?usp=drive_link" 
     },
     { 
       id: 2, 
@@ -69,7 +69,7 @@ export default function Gallery() {
         "/assets/Our-Stories/2nd-Weeks/2nd-9.jpg",
         "/assets/Our-Stories/2nd-Weeks/2nd-10.jpg"
       ],
-      driveLink: "https://drive.google.com/drive/folders/15Zkap2A7-8tpi9P0oeioiD-XQCKWpGT1?usp=drive_link" 
+      driveLink: "https://drive.google.com/drive/folders/15Zkap2A7-8tpi9P0oeioiD-XQCKWpGT1?usp=drive_link"
     },
     { 
       id: 3, 
