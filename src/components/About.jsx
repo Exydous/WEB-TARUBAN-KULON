@@ -24,7 +24,7 @@ export default function About() {
           {/* Left Column: Image/Placeholder & Sejarah (7 cols) */}
           <div className="lg:col-span-7 space-y-6">
             {about.image ? (
-              <div className="rounded-xl overflow-hidden shadow-sm border border-warm-200 aspect-[16/9]">
+              <div className="rounded-xl overflow-hidden shadow-sm border border-warm-200 aspect-video">
                 <img
                   src={about.image || '/assets/Gapura.jpeg'}
                   alt={about.title}
@@ -32,7 +32,7 @@ export default function About() {
                 />
               </div>
             ) : (
-              <div className="rounded-xl bg-warm-100 border border-warm-200 aspect-[16/9] flex flex-col items-center justify-center text-center p-6">
+              <div className="rounded-xl bg-warm-100 border border-warm-200 aspect-video flex flex-col items-center justify-center text-center p-6">
                 <svg
                   className="w-12 h-12 text-warm-300 mb-2"
                   fill="none"
@@ -79,7 +79,7 @@ export default function About() {
               <ul className="space-y-3">
                 {about.misi.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-3">
-                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center text-xs font-semibold mt-0.5">
+                    <span className="shrink-0 w-5 h-5 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center text-xs font-semibold mt-0.5">
                       {idx + 1}
                     </span>
                     <p className="text-xs text-gray-500 leading-relaxed font-light">

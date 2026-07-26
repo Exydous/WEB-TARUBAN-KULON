@@ -1,13 +1,12 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
-import Potensi from './components/Potensi';
 
 // ─── IMPORT SEMUA KOMPONEN ANDA DI SINI ───
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Stats from './components/Stats';
-import UMKMDirectory from './components/UMKMDirectory';
+import Potensi from './components/Potensi'; // Memanggil komponen Potensi yang baru
 import MapSection from './components/MapSection';
 import Footer from './components/Footer';
 import Gallery from './components/Gallery';
@@ -17,7 +16,7 @@ import Gallery from './components/Gallery';
 function Home() {
   const location = useLocation();
 
-  // 2. Ini adalah instruksi agar halaman otomatis men-scroll ke bagian yang dituju
+  // Instruksi agar halaman otomatis men-scroll ke bagian yang dituju
   useEffect(() => {
     if (location.hash) {
       // Jika ada tujuan hash (misal: /#umkm), ambil kata 'umkm'-nya saja
@@ -41,7 +40,10 @@ function Home() {
       <Hero />
       <About />
       {/* <Stats /> */}
-      <UMKMDirectory />
+      
+      {/* Ini yang kita ubah: memanggil Potensi yang berisi Fasilitas, UMKM, dan Budaya */}
+      <Potensi /> 
+      
       <MapSection />
     </main>
   );
