@@ -49,7 +49,7 @@ export default function UMKMDirectory() {
             style={{ transform: `scale(${scale})`, transition: 'transform 0.1s ease-out' }}
             className="text-6xl md:text-[10rem] text-center font-black tracking-tighter text-transparent bg-clip-text bg-linear-to-b from-orange-300 to-orange-600 leading-tight"
           >
-            Data UMKM
+            Data Potensi
           </h2>
           <p 
             style={{ opacity: scale === 1 ? 1 : Math.max(0, scale - 0.2) }}

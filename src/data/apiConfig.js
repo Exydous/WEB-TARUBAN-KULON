@@ -30,7 +30,7 @@ const SPREADSHEET_ID = '1E7SBfDyWBZ6RXDo7rESduNuWayhB2NFKHGSoEN8qkSM';
 // │  Sesuaikan dengan nama tab yang ada di spreadsheet Anda.  │
 // │  Untuk dusun lain, cukup ganti nama sheet-nya saja.       │
 // └───────────────────────────────────────────────────────────┘
-const SHEET_UMKM = 'UMKM_TarubanKulon';
+const SHEET_POTENSI = 'Potensi TarubanKulon';
 const SHEET_STATS = 'Statistik_TarubanKulon';
 
 /**
@@ -49,7 +49,7 @@ export const API_CONFIG = {
    * URL untuk data UMKM (Tab: UMKM Taruban Kulon).
    * Otomatis null jika Spreadsheet ID belum di-set → pakai data statis.
    */
-  umkm: isConfigured ? buildGoogleSheetsUrl(SHEET_UMKM) : null,
+  potensi: isConfigured ? buildGoogleSheetsUrl(SHEET_POTENSI) : null,
 
   /**
    * URL untuk data statistik demografi (Tab: Statistik Taruban Kulon).

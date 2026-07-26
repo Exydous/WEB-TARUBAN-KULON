@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import Potensi from './components/Potensi';
 
 // ─── IMPORT SEMUA KOMPONEN ANDA DI SINI ───
 import Navbar from './components/Navbar';

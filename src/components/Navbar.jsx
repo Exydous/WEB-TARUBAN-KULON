@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react';
 const navLinks = [
   { label: 'Beranda', href: '/' },
   { label: 'Tentang', href: '/#tentang' },
-  // { label: 'Demografi', href: '#demografi' },
+  { label: 'Fasilitas', href: '/#fasilitas' }, // Diperbaiki dari name menjadi label
   { label: 'UMKM', href: '/#umkm' },
+  { label: 'Budaya', href: '/#budaya' },       // Diperbaiki dari name menjadi label
   { label: 'Peta', href: '/#peta' },
   { label: 'Kontak', href: '/#kontak' },
   { label: 'Galeri', href: '/galeri' }
@@ -31,14 +32,13 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           
-          {/* ─── BAGIAN KIRI: Logo Universitas & Judul ─── */}
+          {/* ─── BAGIAN KIRI: Logo Universitas, Logo Kulon Progo & Judul ─── */}
           <div className="flex items-center gap-3">
             <img 
               src="/assets/logo-univ.png" 
               alt="Logo Universitas" 
               className="h-15 md:h-17 w-auto object-contain"
             />
-            {/* 2. Logo Kulon Progo (TAMBAHKAN KODE INI DI SINI) */}
             <img 
               src="/assets/LogoKulonProgo.jpg" 
               alt="Logo Kulon Progo" 
@@ -72,7 +72,7 @@ export default function Navbar() {
                 </a>
               ))}
             </div>
-            {/* Logo KKN (Bisa diklik ke Instagram) */}
+            {/* Logo KKN */}
             <a 
               href="https://www.instagram.com/tarubalon?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
               target="_blank" 

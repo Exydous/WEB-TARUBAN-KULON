@@ -49,22 +49,24 @@ function parseGoogleSheetsResponse(text) {
 
   // ── Konversi setiap baris menjadi object { NamaKolom: nilai } ──
   return dataRows
+    .filter((row) => row && row.c) // Skip null rows
     .map((row) => {
       const obj = {};
-      row.c.forEach((cell, i) => {
-        if (!cols[i]) return;
+      cols.forEach((colName, i) => {
+        if (!colName) return;
 
+        const cell = row.c[i];
         if (!cell || cell.v == null) {
-          obj[cols[i]] = '';
+          obj[colName] = '';
           return;
         }
 
         // Gunakan formatted value (f) jika ada, agar angka seperti
         // nomor WhatsApp (6.285E12) tetap tampil benar ("6285158424337")
         if (cell.f != null) {
-          obj[cols[i]] = String(cell.f);
+          obj[colName] = String(cell.f);
         } else {
-          obj[cols[i]] = cell.v;
+          obj[colName] = cell.v;
         }
       });
       return obj;
@@ -78,8 +80,8 @@ function parseGoogleSheetsResponse(text) {
 /* ═══════════════════════════════════════════════════════════
    localStorage Cache — Mengurangi fetch & mempercepat load
    ═══════════════════════════════════════════════════════════ */
-const CACHE_PREFIX = 'padukuhan_data_';
-const CACHE_DURATION = 0; // Cache diset 0 agar data langsung auto-terganti saat web di-refresh
+const CACHE_PREFIX = 'padukuhan_v3_';
+const CACHE_DURATION = 0; // 0 untuk selalu mengambil data terbaru (live)
 
 function getCached(key) {
   try {
@@ -88,9 +90,8 @@ function getCached(key) {
 
     const { data, ts } = JSON.parse(raw);
     if (Date.now() - ts > CACHE_DURATION) {
-      // Kita hapus cache dan kembalikan null agar selalu ambil data terbaru
       localStorage.removeItem(CACHE_PREFIX + key);
-      return null;
+      return null; // Cache expired
     }
     return data;
   } catch {
@@ -110,10 +111,10 @@ function setCache(key, data) {
 }
 
 /**
- * Mengubah URL Google Drive sharing menjadi URL gambar langsung (thumbnail).
+ * Mengubah URL Google Drive sharing menjadi URL gambar langsung.
  *
  * Input:  https://drive.google.com/file/d/FILE_ID/view?usp=sharing
- * Output: https://drive.google.com/thumbnail?id=FILE_ID&sz=w1000
+ * Output: https://lh3.googleusercontent.com/d/FILE_ID
  *
  * Jika bukan URL Google Drive, dikembalikan apa adanya.
  */
@@ -125,8 +126,7 @@ function toDirectImageUrl(url) {
     /drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/
   );
   if (driveMatch) {
-    // Gunakan lh3.googleusercontent.com untuk loading gambar yang lebih cepat & stabil (responsif)
-    return `https://lh3.googleusercontent.com/d/${driveMatch[1]}=w500`;
+    return `https://lh3.googleusercontent.com/d/${driveMatch[1]}`;
   }
 
   // Pattern: drive.google.com/open?id={FILE_ID}
@@ -134,11 +134,21 @@ function toDirectImageUrl(url) {
     /drive\.google\.com\/open\?id=([a-zA-Z0-9_-]+)/
   );
   if (openMatch) {
-    return `https://lh3.googleusercontent.com/d/${openMatch[1]}=w500`;
+    return `https://lh3.googleusercontent.com/d/${openMatch[1]}`;
   }
 
   return url;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   Mapper: row → format yang dipakai komponen
+   ═══════════════════════════════════════════════════════════
+   Satu sheet "Potensi Giling" berisi semua data.
+   Kolom "Section" menentukan kategori:
+   - "Fasilitas Umum"         → untuk komponen Fasilitas
+   - "Direktori UMKM"         → untuk komponen UMKMDirectory
+   - "Kebudayaan dan Kesenian" → untuk komponen Kebudayaan
+   ═══════════════════════════════════════════════════════════ */
 
 /* ── Mapper: row → format UMKM app ── */
 function mapUmkmRow(row, index) {
@@ -156,15 +166,44 @@ function mapUmkmRow(row, index) {
   };
 }
 
-/* ── Mapper: row → format statistik app ── */
-function mapStatsRow(row) {
+/* ── Mapper: row → format fasilitas app ── */
+function mapFasilitasRow(row, index) {
+  const rawImage = row['Foto'] || row['foto'] || null;
+
   return {
-    id: String(row['ID'] || row['id'] || row['Label'] || '').toLowerCase(),
-    label: row['Label'] || row['label'] || '',
-    value: parseInt(row['Nilai'] || row['nilai'] || 0, 10),
+    id: index + 1,
+    name: row['Nama'] || row['nama'] || '',
     description: row['Deskripsi'] || row['deskripsi'] || '',
-    icon: row['Icon'] || row['icon'] || 'home',
+    category: row['Kategori'] || row['kategori'] || 'Umum',
+    gmaps: row['Gmaps'] || row['gmaps'] || null,
+    image: toDirectImageUrl(rawImage),
   };
+}
+
+/* ── Mapper: row → format kebudayaan app ── */
+function mapKebudayaanRow(row, index) {
+  const rawImage = row['Foto'] || row['foto'] || null;
+
+  return {
+    id: index + 1,
+    name: row['Nama'] || row['nama'] || '',
+    description: row['Deskripsi'] || row['deskripsi'] || '',
+    category: row['Kategori'] || row['kategori'] || 'Budaya',
+    gmaps: row['Gmaps'] || row['gmaps'] || null,
+    image: toDirectImageUrl(rawImage),
+  };
+}
+
+/**
+ * Menentukan section dari value kolom "Section" di spreadsheet.
+ * Menggunakan matching fleksibel agar typo kecil tetap terdeteksi.
+ */
+function detectSection(sectionValue) {
+  const s = String(sectionValue || '').toLowerCase().trim();
+  if (s.includes('umkm')) return 'umkm';
+  if (s.includes('fasilitas')) return 'fasilitas';
+  if (s.includes('budaya') || s.includes('kesenian') || s.includes('kebudayaan')) return 'kebudayaan';
+  return 'unknown';
 }
 
 /**
@@ -199,13 +238,13 @@ async function fetchGoogleSheet(url, cacheKey) {
 export function SiteDataProvider({ children }) {
   const [data, setData] = useState(siteConfig);
   const [loading, setLoading] = useState(() =>
-    Boolean(API_CONFIG.umkm || API_CONFIG.stats)
+    Boolean(API_CONFIG.potensi)
   );
   const [error, setError] = useState(null);
 
   useEffect(() => {
     // Tidak ada API URL? Langsung pakai data statis.
-    if (!API_CONFIG.umkm && !API_CONFIG.stats) {
+    if (!API_CONFIG.potensi) {
       setLoading(false);
       return;
     }
@@ -216,19 +255,42 @@ export function SiteDataProvider({ children }) {
       try {
         const updates = {};
 
-        // Fetch UMKM dari Google Sheets
-        if (API_CONFIG.umkm) {
-          const rows = await fetchGoogleSheet(API_CONFIG.umkm, 'umkm');
+        // ── Fetch Potensi Giling (gabungan Fasilitas + UMKM + Kebudayaan) ──
+        if (API_CONFIG.potensi) {
+          const rows = await fetchGoogleSheet(API_CONFIG.potensi, 'potensi');
           if (Array.isArray(rows) && rows.length > 0) {
-            updates.umkm = rows.map(mapUmkmRow);
-          }
-        }
+            // Pisahkan berdasarkan kolom "Section"
+            const fasilitasRows = [];
+            const umkmRows = [];
+            const kebudayaanRows = [];
 
-        // Fetch Statistik dari Google Sheets
-        if (API_CONFIG.stats) {
-          const rows = await fetchGoogleSheet(API_CONFIG.stats, 'stats');
-          if (Array.isArray(rows) && rows.length > 0) {
-            updates.stats = rows.map(mapStatsRow);
+            rows.forEach((row) => {
+              const section = detectSection(row['Section'] || row['section']);
+              switch (section) {
+                case 'fasilitas':
+                  fasilitasRows.push(row);
+                  break;
+                case 'umkm':
+                  umkmRows.push(row);
+                  break;
+                case 'kebudayaan':
+                  kebudayaanRows.push(row);
+                  break;
+                default:
+                  // Baris tanpa section yang valid → abaikan
+                  break;
+              }
+            });
+
+            if (fasilitasRows.length > 0) {
+              updates.fasilitas = fasilitasRows.map(mapFasilitasRow);
+            }
+            if (umkmRows.length > 0) {
+              updates.umkm = umkmRows.map(mapUmkmRow);
+            }
+            if (kebudayaanRows.length > 0) {
+              updates.kebudayaan = kebudayaanRows.map(mapKebudayaanRow);
+            }
           }
         }
 
@@ -262,7 +324,7 @@ export function SiteDataProvider({ children }) {
  * Hook untuk mengakses data site dari context.
  * Gunakan di semua komponen yang butuh data:
  *
- *   const { umkm, stats, loading } = useSiteData();
+ *  const { umkm, fasilitas, kebudayaan, stats, loading } = useSiteData();
  */
 export function useSiteData() {
   const ctx = useContext(SiteDataContext);
