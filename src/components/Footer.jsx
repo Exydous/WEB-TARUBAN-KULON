@@ -16,7 +16,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer id="kontak" className="bg-orange-950 text-white">
+    <footer id="alamat" className="bg-orange-950 text-white">
       {/* ── Main content ── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
@@ -54,7 +54,7 @@ export default function Footer() {
           {/* ── Column 3 : Contact ── */}
           <div>
             <h3 className="text-xs font-semibold text-orange-400 uppercase tracking-widest mb-5">
-              Kontak
+              Alamat
             </h3>
             <ul className="space-y-5">
               {/* Address */}

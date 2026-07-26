@@ -7,7 +7,7 @@ const navLinks = [
   { label: 'UMKM', href: '/#umkm' },
   { label: 'Budaya', href: '/#budaya' },       // Diperbaiki dari name menjadi label
   { label: 'Peta', href: '/#peta' },
-  { label: 'Kontak', href: '/#kontak' },
+  { label: 'Alamat', href: '/#alamat' },
   { label: 'Galeri', href: '/galeri' }
 ];
 

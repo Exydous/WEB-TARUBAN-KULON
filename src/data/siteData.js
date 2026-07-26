@@ -127,7 +127,7 @@ export const siteConfig = {
     },
   ],
 
-  /* ─── Kontak ─── */
+  /* ─── Alamat ─── */
   contact: {
     address:
       'Padukuhan Taruban Kulon, Desa Tuksono, Kec. Sentolo, Kab. Kulon Progo, Daerah Istimewa Yogyakarta',
