@@ -74,11 +74,29 @@ export default function Gallery() {
     { 
       id: 3, 
       title: "3rd Weeks of KKN", 
-      thumbnail: "/assets/umkm_thumb.jpg", 
-      modalCover: "/assets/umkm_cover.jpg",
-      modalGallery: [],
-      driveLink: "https://drive.google.com/drive/folders/LINK_FOLDER_UMKM" 
+      thumbnail: "/assets/Our-Stories/3rd-Weeks/Day 18-1.jpeg", 
+      modalCover: "/assets/Our-Stories/3rd-Weeks/Day 18-1.jpeg",
+      modalGallery: [
+        "/assets/Our-Stories/3rd-Weeks/Day 18-1.jpeg",
+        "/assets/Our-Stories/3rd-Weeks/Day 18-17.jpeg",
+        "/assets/Our-Stories/3rd-Weeks/Day 18-46.jpeg",
+        "/assets/Our-Stories/3rd-Weeks/Day 21-14.jpeg",
+        "/assets/Our-Stories/3rd-Weeks/Day 21-16.jpeg",
+        "/assets/Our-Stories/3rd-Weeks/Day 21-26.jpeg",
+        "/assets/Our-Stories/3rd-Weeks/Day 21-43.jpeg",
+        "/assets/Our-Stories/3rd-Weeks/Day 21-44.jpeg",
+        "/assets/Our-Stories/3rd-Weeks/Day 21-45.jpeg"
+      ],
+      driveLink: "https://drive.google.com/drive/folders/1aj_kQluYPZNlM3lP4XjdEQUaZrm8OylA?usp=drive_link" 
     },
+    { 
+      id: 4, 
+      title: "4th Weeks of KKN", 
+      thumbnail: "/assets/Our-Stories/3rd-Weeks/Day 18-1.jpeg", 
+      modalCover: "/assets/Our-Stories/3rd-Weeks/Day 18-1.jpeg",
+      modalGallery: [],
+      driveLink: "https://drive.google.com/drive/folders/1KxEayT0BR7araJEBbkrpbPr4dc8lQaTL?usp=drive_link" 
+    }
   ];
 
   const [isHovered, setIsHovered] = useState(false);
@@ -215,14 +233,19 @@ export default function Gallery() {
         </div>
 
         {/* ─── BAGIAN 2: OUR STORIES ─── */}
+        {/* ─── BAGIAN 2: OUR STORIES ─── */}
         <div>
           <h3 className="text-3xl font-bold text-white mb-10 text-center">Our Stories</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          
+          {/* 1. Ubah container di bawah ini dari grid menjadi flex */}
+          <div className="flex flex-wrap justify-center gap-6">
+            
             {ourStories.map((story) => (
               <div 
                 key={story.id} 
                 onClick={() => setSelectedStory(story)}
-                className="group relative h-72 rounded-2xl overflow-hidden shadow-lg bg-gray-800 border border-white/5 cursor-pointer"
+                // 2. Tambahkan pengaturan lebar (width) ini agar ukurannya tetap sama persis seperti saat memakai Grid
+                className="group relative h-72 w-full sm:w-[calc(50%-12px)] md:w-[calc(33.333%-16px)] rounded-2xl overflow-hidden shadow-lg bg-gray-800 border border-white/5 cursor-pointer"
               >
                 <div className="absolute inset-0 bg-gray-900"></div>
                 <img 
@@ -241,6 +264,7 @@ export default function Gallery() {
                 </div>
               </div>
             ))}
+
           </div>
         </div>
 
