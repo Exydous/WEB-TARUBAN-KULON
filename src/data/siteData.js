@@ -154,11 +154,15 @@ export const siteConfig = {
     title: 'Profil Padukuhan',
     subtitle: 'Sejarah, Visi & Misi Padukuhan Taruban Kulon',
     sejarah: 'Padukuhan Taruban Kulon merupakan salah satu wilayah yang kaya akan budaya gotong royong dan potensi alam di Desa Tuksono, Kecamatan Sentolo. Didirikan dengan semangat kebersamaan, padukuhan ini terus berkembang menjadi sentra ekonomi kreatif dan UMKM di Kulon Progo.',
-    visi: 'Mewujudkan Desa Tuksono menjadi Desa Mandiri melalui bidang Pertanian dan Industri Kecil, serta menjadi Desa Budaya yang lestari.',
+    visi: 'Bersama masyarakat kita wujudkan Desa Tuksono yang bersih, jujur, amanah demi tercapainya masyarakat yang religius, adil, makmur dan berkepribadian yang luhur.',
     misi: [
-      'Meningkatkan perekonomian masyarakat melalui pemberdayaan UMKM dan kerajinan lokal.',
-      'Memajukan sektor pertanian sebagai penopang utama ketahanan pangan.',
-      'Melestarikan nilai-nilai tradisi dan seni budaya lokal, seperti pelestarian adat Baritan dan kesenian Oglek.'
+      'Memperkokoh persatuan dan kerukunan antar warga Desa Tuksono tanpa memandang agama, status sosial, golongan dan mengusahakan peningkatan kesejahteraan kegiatan keagamaan.',
+      'Memberdayakan semua elemen masyarakat dalam proses pembangunan mulai pembangunan yang berkualitas, transparan dan dapat dipertanggungjawabkan.',
+      'Memaksimalkan kinerja perangkat desa sesuai tugas pokok dan fungsi demi tercapainya pelayanan kepada masyarakat yang prima.',
+      'Melestarikan adat tradisi, seni, dan budaya yang sudah ada di masyarakat untuk mewujudkan jati diri Tuksono sebagai Desa Budaya.',
+      'Membina, mengembangkan, dan selalu koordinasi untuk memfungsikan LPMD, PKK, Karang Taruna, FKPM, dan lembaga kemasyarakatan lainnya demi tercapainya suasana yang aman, tentram, damai, dan nyaman di kalangan masyarakat.',
+      'Membina dan memfungsikan generasi muda melalui karang taruna sebagai tulang punggung desa yang memiliki budi pekerti yang luhur dan mandiri dalam menyikapi Tuksono sebagai kawasan industri sehingga warga Tuksono bisa menjadi pelaku bukan hanya jadi penonton.',
+      'Mencermati ulang bantuan bagi masyarakat kurang mampu, kaum difabel dan lansia agar tidak salah sasaran.'
     ],
     image: '/assets/Gapura.jpeg', // Ganti dengan gambar profil padukuhan
   },

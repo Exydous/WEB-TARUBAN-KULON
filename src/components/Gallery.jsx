@@ -5,7 +5,7 @@ export default function Gallery() {
   const SECRET_PASSWORD = "280805"; 
 
   // ─── STATE UNTUK SISTEM KUNCI ───
-  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [isUnlocked, setIsUnlocked] = useState(true);
   const [passwordInput, setPasswordInput] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
