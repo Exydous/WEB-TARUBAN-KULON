@@ -144,7 +144,7 @@ export default function Gallery() {
               
               <h2 className="text-2xl font-bold text-white mb-2">Galeri Terkunci</h2>
               <p className="text-gray-300 text-sm mb-8">
-                Halaman ini belum sepenuhnya jadi.
+                Halaman hanya bisa di akses oleh anggota KKN Taruban Kulon 2026. Silakan masukkan kata sandi untuk membuka galeri.
               </p>
 
               <form onSubmit={handleUnlock} className="flex flex-col gap-4">
