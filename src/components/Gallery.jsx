@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Gallery() {
   // ─── PENGATURAN PASSWORD ───
@@ -8,6 +8,19 @@ export default function Gallery() {
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [passwordInput, setPasswordInput] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    if (!isUnlocked) {
+      document.body.style.overflow = 'hidden'; // Matikan scroll
+    } else {
+      document.body.style.overflow = ''; // Kembalikan scroll saat terbuka
+    }
+
+    // Cleanup: Pastikan scroll kembali normal jika user pindah halaman
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isUnlocked]);
 
   // ─── DATA ANGGOTA KKN ───
   const kknMembers = [
@@ -37,33 +50,33 @@ export default function Gallery() {
     { 
       id: 1, 
       title: "1st Weeks of KKN", 
-      thumbnail: "/assets/Our-Stories/1st-Weeks/1st-1.JPG", 
-      modalCover: "/assets/Our-Stories/1st-Weeks/1st-1.JPG", 
-      modalGallery: ["/assets/Our-Stories/1st-Weeks/1st-2.JPG", "/assets/Our-Stories/1st-Weeks/1st-3.JPG", "/assets/Our-Stories/1st-Weeks/1st-4.jpg", "/assets/Our-Stories/1st-Weeks/1st-5.jpg", "/assets/Our-Stories/1st-Weeks/1st-6.jpg", "/assets/Our-Stories/1st-Weeks/1st-7.jpg", "/assets/Our-Stories/1st-Weeks/1st-8.jpg", "/assets/Our-Stories/1st-Weeks/1st-9.jpg", "/assets/Our-Stories/1st-Weeks/1st-10.jpg"],
+      thumbnail: "/assets/Our-Stories/1st-Weeks/1st-1.jpeg", 
+      modalCover: "/assets/Our-Stories/1st-Weeks/1st-1.jpeg", 
+      modalGallery: ["/assets/Our-Stories/1st-Weeks/1st-2.jpeg", "/assets/Our-Stories/1st-Weeks/1st-3.jpeg", "/assets/Our-Stories/1st-Weeks/1st-4.jpeg", "/assets/Our-Stories/1st-Weeks/1st-5.jpeg", "/assets/Our-Stories/1st-Weeks/1st-6.jpeg", "/assets/Our-Stories/1st-Weeks/1st-7.jpeg", "/assets/Our-Stories/1st-Weeks/1st-8.jpeg", "/assets/Our-Stories/1st-Weeks/1st-9.jpeg", "/assets/Our-Stories/1st-Weeks/1st-10.jpeg"],
       driveLink: "https://drive.google.com/drive/folders/1yjVaIT5y8Gbt_R3MQP_4WKE1y9dSDrZ9?usp=drive_link" 
     },
     { 
       id: 2, 
       title: "2nd Weeks of KKN", 
-      thumbnail: "/assets/Our-Stories/2nd-Weeks/2nd-3.jpg", 
-      modalCover: "/assets/Our-Stories/2nd-Weeks/2nd-3.jpg",
-      modalGallery: ["/assets/Our-Stories/2nd-Weeks/2nd-1.jpg", "/assets/Our-Stories/2nd-Weeks/2nd-2.jpg", "/assets/Our-Stories/2nd-Weeks/2nd-4.jpg", "/assets/Our-Stories/2nd-Weeks/2nd-5.jpg", "/assets/Our-Stories/2nd-Weeks/2nd-6.jpg", "/assets/Our-Stories/2nd-Weeks/2nd-7.jpg", "/assets/Our-Stories/2nd-Weeks/2nd-8.jpg", "/assets/Our-Stories/2nd-Weeks/2nd-9.jpg", "/assets/Our-Stories/2nd-Weeks/2nd-10.jpg"],
+      thumbnail: "/assets/Our-Stories/2nd-Weeks/2nd-3.jpeg", 
+      modalCover: "/assets/Our-Stories/2nd-Weeks/2nd-3.jpeg",
+      modalGallery: ["/assets/Our-Stories/2nd-Weeks/2nd-1.jpeg", "/assets/Our-Stories/2nd-Weeks/2nd-2.jpeg", "/assets/Our-Stories/2nd-Weeks/2nd-4.jpeg", "/assets/Our-Stories/2nd-Weeks/2nd-5.jpeg", "/assets/Our-Stories/2nd-Weeks/2nd-6.jpeg", "/assets/Our-Stories/2nd-Weeks/2nd-7.jpeg", "/assets/Our-Stories/2nd-Weeks/2nd-8.jpeg", "/assets/Our-Stories/2nd-Weeks/2nd-9.jpeg", "/assets/Our-Stories/2nd-Weeks/2nd-10.jpeg"],
       driveLink: "https://drive.google.com/drive/folders/15Zkap2A7-8tpi9P0oeioiD-XQCKWpGT1?usp=drive_link"
     },
     { 
       id: 3, 
       title: "3rd Weeks of KKN", 
-      thumbnail: "/assets/Our-Stories/3rd-Weeks/Day 18-1.jpeg", 
-      modalCover: "/assets/Our-Stories/3rd-Weeks/Day 18-1.jpeg",
-      modalGallery: ["/assets/Our-Stories/3rd-Weeks/Day 18-1.jpeg", "/assets/Our-Stories/3rd-Weeks/Day 18-17.jpeg", "/assets/Our-Stories/3rd-Weeks/Day 18-46.jpeg", "/assets/Our-Stories/3rd-Weeks/Day 21-14.jpeg", "/assets/Our-Stories/3rd-Weeks/Day 21-16.jpeg", "/assets/Our-Stories/3rd-Weeks/Day 21-26.jpeg", "/assets/Our-Stories/3rd-Weeks/Day 21-43.jpeg", "/assets/Our-Stories/3rd-Weeks/Day 21-44.jpeg", "/assets/Our-Stories/3rd-Weeks/Day 21-45.jpeg"],
+      thumbnail: "/assets/Our-Stories/3rd-Weeks/3rd-9.jpeg", 
+      modalCover: "/assets/Our-Stories/3rd-Weeks/3rd-9.jpeg",
+      modalGallery: ["/assets/Our-Stories/3rd-Weeks/3rd-9.jpeg", "/assets/Our-Stories/3rd-Weeks/3rd-2.jpeg", "/assets/Our-Stories/3rd-Weeks/3rd-3.jpeg", "/assets/Our-Stories/3rd-Weeks/3rd-4.jpeg", "/assets/Our-Stories/3rd-Weeks/3rd-5.jpeg", "/assets/Our-Stories/3rd-Weeks/3rd-6.jpeg", "/assets/Our-Stories/3rd-Weeks/3rd-7.jpeg", "/assets/Our-Stories/3rd-Weeks/3rd-8.jpeg", "/assets/Our-Stories/3rd-Weeks/3rd-1.jpeg"],
       driveLink: "https://drive.google.com/drive/folders/1aj_kQluYPZNlM3lP4XjdEQUaZrm8OylA?usp=drive_link" 
     },
     { 
       id: 4, 
       title: "4th Weeks of KKN", 
-      thumbnail: "/assets/Our-Stories/3rd-Weeks/Day 18-1.jpeg", 
-      modalCover: "/assets/Our-Stories/3rd-Weeks/Day 18-1.jpeg",
-      modalGallery: [],
+      thumbnail: "/assets/Our-Stories/4th-Weeks/4th-1.jpg", 
+      modalCover: "/assets/Our-Stories/4th-Weeks/4th-1.jpg",
+      modalGallery: ["/assets/Our-Stories/4th-Weeks/4th-2.jpeg", "/assets/Our-Stories/4th-Weeks/4th-3.jpeg", "/assets/Our-Stories/4th-Weeks/4th-4.jpeg", "/assets/Our-Stories/4th-Weeks/4th-5.jpeg", "/assets/Our-Stories/4th-Weeks/4th-6.jpeg", "/assets/Our-Stories/4th-Weeks/4th-7.jpeg", "/assets/Our-Stories/4th-Weeks/4th-8.jpeg", "/assets/Our-Stories/4th-Weeks/4th-9.jpeg", "/assets/Our-Stories/4th-Weeks/4th-11.jpeg"],    
       driveLink: "https://drive.google.com/drive/folders/1KxEayT0BR7araJEBbkrpbPr4dc8lQaTL?usp=drive_link" 
     }
   ];
@@ -96,7 +109,8 @@ export default function Gallery() {
   };
 
   return (
-    <div className="relative min-h-screen w-full">
+    <div className={`relative w-full ${!isUnlocked ? 'h-screen overflow-hidden' : 'min-h-screen'}`}>
+      
       {/* ════════════ VIDEO BACKGROUND & OVERLAY ════════════ */}
       <div className="fixed inset-0 z-10 pointer-events-none">
         <video 
@@ -118,7 +132,7 @@ export default function Gallery() {
         
         {/* ─── TAMPILAN 1: LAYAR KUNCI ─── */}
         {!isUnlocked ? (
-          <section className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
+          <section className="h-screen flex items-center justify-center px-4 relative">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-orange-900/40 rounded-full blur-[100px] pointer-events-none"></div>
             
             <div className="relative max-w-md w-full bg-[#1a1a1a]/80 backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-white/10 shadow-2xl text-center">
@@ -287,22 +301,33 @@ export default function Gallery() {
 
         {/* ─── MODAL 2: OUR STORIES ─── */}
         {selectedStory && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-black/95 backdrop-blur-md transition-all duration-300">
-            <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-[#1a1a1a]/90 backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl custom-scrollbar">
-              <div className="sticky top-0 z-30 flex justify-end p-4 bg-linear-to-b from-[#1a1a1a] to-transparent pointer-events-none">
-                <button
-                  onClick={() => setSelectedStory(null)}
-                  className="pointer-events-auto text-gray-400 hover:text-white bg-black/80 hover:bg-red-500 rounded-full p-2.5 transition-colors shadow-lg border border-white/20"
-                >
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
+          <div 
+            onClick={() => setSelectedStory(null)}
+            // PERBAIKAN 1: Tambahkan pt-20 (padding-top) pada HP agar area atas lebih lega untuk diklik
+            className="fixed inset-0 z-999 flex items-center justify-center p-4 pt-20 pb-8 md:p-8 bg-black/95 backdrop-blur-md transition-all duration-300"
+          >
+            
+            {/* TOMBOL SILANG (X) */}
+            <button
+              onClick={() => setSelectedStory(null)}
+              // PERBAIKAN 2: Posisikan tombol di top-5 right-5 untuk HP agar mudah terjangkau jempol
+              className="fixed top-5 right-5 md:top-8 md:right-8 z-1000 text-gray-300 hover:text-white bg-[#1a1a1a] hover:bg-red-600 rounded-full p-3 transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)] border border-white/20 cursor-pointer"
+            >
+              <svg className="w-6 h-6 md:w-7 md:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
 
-              <div className="px-6 pb-10 md:px-10 -mt-8">
-                <div className="mb-8 text-center">
-                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-3 drop-shadow-md">{selectedStory.title}</h3>
+            <div 
+              onClick={(e) => e.stopPropagation()}
+              // PERBAIKAN 3: Ubah lebar menjadi w-[95%] dan tinggi maksimal max-h-[75vh] khusus di HP. 
+              // Ini akan memaksa kotak mengecil dan menyisakan banyak area hitam di luarnya.
+              className="relative w-[95%] md:w-full max-w-5xl max-h-[75vh] md:max-h-[90vh] overflow-y-auto bg-[#1a1a1a]/90 backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl custom-scrollbar pt-8 md:pt-10"
+            >
+              
+              <div className="px-5 pb-8 md:px-10">
+                <div className="mb-6 md:mb-8 text-center">
+                  <h3 className="text-2xl md:text-4xl font-bold text-white mb-3 drop-shadow-md">{selectedStory.title}</h3>
                   <div className="w-16 h-1.5 bg-orange-500 mx-auto rounded-full shadow-[0_0_10px_rgba(249,115,22,0.5)]"></div>
                 </div>
 
@@ -369,11 +394,13 @@ export default function Gallery() {
         {selectedImagePreview && (
           <div 
             onClick={() => setSelectedImagePreview(null)}
-            className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl cursor-zoom-out animate-fadeIn"
+            // PERBAIKAN: Z-index dinaikkan menjadi z-[9999] agar pasti di atas Modal 2
+            className="fixed inset-0 z-9999 flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl cursor-zoom-out animate-fadeIn"
           >
             <button
               onClick={() => setSelectedImagePreview(null)}
-              className="absolute top-6 right-6 text-white bg-white/20 hover:bg-red-500 rounded-full p-3 transition-colors z-10 border border-white/30 backdrop-blur-md"
+              // Z-index tombol silang untuk Lightbox dinaikkan menjadi z-[10000]
+              className="absolute top-4 right-4 md:top-6 md:right-6 text-white bg-white/20 hover:bg-red-500 rounded-full p-3 transition-colors z-10000 border border-white/30 backdrop-blur-md shadow-lg"
             >
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
@@ -384,7 +411,8 @@ export default function Gallery() {
               <img 
                 src={selectedImagePreview} 
                 alt="Preview Full" 
-                className="max-w-full max-h-[88vh] object-contain rounded-lg shadow-2xl border border-white/20"
+                className="max-w-full max-h-[88vh] object-contain rounded-lg shadow-2xl border border-white/20 relative z-40"
+                // e.stopPropagation() memastikan klik pada gambar tidak menutup Lightbox
                 onClick={(e) => e.stopPropagation()} 
               />
             </div>
